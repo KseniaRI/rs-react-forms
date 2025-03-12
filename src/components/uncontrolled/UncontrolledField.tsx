@@ -1,20 +1,17 @@
-import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import { useAppSelector } from '../../app/hooks';
 import { FieldData, FormData } from '../../types';
 import { Field } from '../shared/field/Field';
-import { useAppSelector } from '../../app/hooks';
 
-interface ControlledFieldProps {
+interface UncontrolledFieldProps {
   name: keyof FormData;
   fieldData: FieldData;
-  errors: FieldErrors<FieldValues>;
-  register: UseFormRegister<FormData>;
+  fieldRef: (el: HTMLInputElement | HTMLSelectElement | null) => void;
 }
-const ControlledField = ({
+const UncontrolledField = ({
   name,
   fieldData,
-  errors,
-  register,
-}: ControlledFieldProps) => {
+  fieldRef,
+}: UncontrolledFieldProps) => {
   const { type, label, validation, options, placeholder } = fieldData;
   const countries = useAppSelector(state => state.forms.countries);
 
@@ -26,32 +23,22 @@ const ControlledField = ({
     case 'checkbox':
     case 'file':
       return (
-        <Field
-          label={label}
-          required={validation?.required}
-          key={name}
-          error={errors[name]}
-        >
+        <Field label={label} required={validation?.required} key={name}>
           <input
-            {...register(name, { required: fieldData.validation?.message })}
+            name={name}
             type={type}
             id={name}
+            required={validation?.required}
             placeholder={placeholder}
+            ref={fieldRef}
           />
         </Field>
       );
     case 'select': {
       const selectOptions = name !== 'country' ? options : countries;
       return (
-        <Field
-          label={label}
-          required={validation?.required}
-          key={name}
-          error={errors[name]}
-        >
-          <select
-            {...register(name, { required: fieldData.validation?.message })}
-          >
+        <Field label={label} required={validation?.required} key={name}>
+          <select name={name} required={validation?.required} ref={fieldRef}>
             {selectOptions?.map(option => (
               <option key={option} value={option}>
                 {option}
@@ -67,4 +54,4 @@ const ControlledField = ({
   }
 };
 
-export default ControlledField;
+export default UncontrolledField;

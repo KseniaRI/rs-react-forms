@@ -12,14 +12,19 @@ const Main = () => {
 
   return (
     <div>
-      <p>Main page</p>
       <nav>
         <NavLink to="/uncontrolled">Go to Uncontrolled Form page</NavLink>
         <br />
         <NavLink to="controlled">Go to Controlled Form page</NavLink>
       </nav>
-      {controlledFormData && <DataList data={controlledFormData} />}
-      {uncontrolledFormData && <DataList data={uncontrolledFormData} />}
+      <div>
+        <p>Data from Controlled Form</p>
+        {controlledFormData && <DataList data={controlledFormData} />}
+      </div>
+      <div>
+        <p>Data from Uncontrolled Form</p>
+        {uncontrolledFormData && <DataList data={uncontrolledFormData} />}
+      </div>
     </div>
   );
 };
