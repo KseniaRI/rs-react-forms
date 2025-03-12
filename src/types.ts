@@ -6,12 +6,28 @@ export interface FormData {
   confirmPassword: string;
   gender: 'male' | 'female';
   accept: boolean;
-  picture: Picture;
+  picture: FileList;
   country: string;
 }
 
 export interface Picture {
-  base64: string;
+  name: string;
   size: number;
-  extension: 'png' | 'jpeg';
+  type: 'png' | 'jpeg' | 'jpg';
 }
+
+export type FieldData = {
+  label: string;
+  type: string;
+  validation?: {
+    required?: boolean;
+    message?: string;
+    maxSize?: number;
+    allowedExtensions?: string[];
+  };
+  allowCustomValue?: boolean;
+  options?: string[];
+  placeholder?: string;
+};
+
+export type FormType = 'controlled' | 'uncontrolled';
