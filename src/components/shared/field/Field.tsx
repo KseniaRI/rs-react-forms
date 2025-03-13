@@ -21,13 +21,15 @@ export const Field = ({
 }: FieldProps) => {
   const id = htmlFor || getChildId(children);
   return (
-    <div className={styles.field}>
-      <label htmlFor={id}>
-        {label}
-        {required && '*'}
-      </label>
-      {children}
-      {error && <small>{error.message}</small>}
-    </div>
+    <>
+      <div className={styles.field}>
+        <label htmlFor={id}>
+          {label}
+          {required && '*'}
+        </label>
+        {children}
+      </div>
+      {error && <small className={styles.error}>{error.message}</small>}
+    </>
   );
 };

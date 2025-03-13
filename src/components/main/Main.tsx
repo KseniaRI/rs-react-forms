@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router';
 import { useAppSelector } from '../../app/hooks';
 import DataList from './DataList';
+import styles from './Main.module.css';
 
 const Main = () => {
   const controlledFormData = useAppSelector(
@@ -11,19 +12,23 @@ const Main = () => {
   );
 
   return (
-    <div>
-      <nav>
-        <NavLink to="/uncontrolled">Go to Uncontrolled Form page</NavLink>
-        <br />
-        <NavLink to="controlled">Go to Controlled Form page</NavLink>
+    <div className={styles.mainPage}>
+      <h1 className={styles.title}>React Forms: controlled and uncontrolled</h1>
+      <nav className={styles.nav}>
+        <NavLink className={styles.link} to="controlled">
+          Go to Controlled Form page
+        </NavLink>
+        <NavLink className={styles.link} to="/uncontrolled">
+          Go to Uncontrolled Form page
+        </NavLink>
       </nav>
-      <div>
-        <p>Data from Controlled Form</p>
-        {controlledFormData && <DataList data={controlledFormData} />}
-      </div>
-      <div>
-        <p>Data from Uncontrolled Form</p>
-        {uncontrolledFormData && <DataList data={uncontrolledFormData} />}
+      <div className={styles.formResults}>
+        {controlledFormData && (
+          <DataList data={controlledFormData} formType="controlled" />
+        )}
+        {uncontrolledFormData && (
+          <DataList data={uncontrolledFormData} formType="uncontrolled" />
+        )}
       </div>
     </div>
   );

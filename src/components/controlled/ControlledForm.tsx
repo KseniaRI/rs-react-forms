@@ -17,10 +17,11 @@ const ControlledForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
   } = useForm<FormData>({
     resolver: yupResolver(validationSchema),
+    mode: 'onChange',
   });
 
   const onSubmit = async (data: FormData) => {
@@ -47,7 +48,7 @@ const ControlledForm = () => {
             />
           );
         })}
-        <input type="submit" />
+        <input type="submit" disabled={!isValid} />
       </form>
     </FormPage>
   );

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { NavLink } from 'react-router';
 import { FormType } from '../../../utils/types';
+import styles from './FormPage.module.css';
 
 const FormPage = ({
   children,
@@ -15,7 +16,7 @@ const FormPage = ({
       : 'Uncontrolled Form';
 
   return (
-    <div>
+    <div className={styles.formPage}>
       <h2>{pageTitle}</h2>
       {children}
       <NavLink to="/">Go to Main</NavLink>

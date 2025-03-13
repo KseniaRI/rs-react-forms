@@ -73,7 +73,10 @@ const UncontrolledForm = () => {
             />
           );
         })}
-        <input type="submit" />
+        <input
+          type="submit"
+          // disabled={Object.keys(localErrors).length > 0}
+        />
       </form>
     </FormPage>
   );
