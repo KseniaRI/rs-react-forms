@@ -4,16 +4,11 @@ const DataList = ({ data }: { data: FormDataStore }) => {
   return (
     <ul>
       {Object.entries(data).map(([key, value]) => {
-        if (key === 'picture' && value instanceof File) {
-          const imageUrl = URL.createObjectURL(value);
+        if (key === 'picture' && typeof value === 'string') {
           return (
             <li key={key}>
               {key} :{' '}
-              <img
-                src={imageUrl}
-                alt={value.name}
-                style={{ maxWidth: '200px' }}
-              />
+              <img src={value} alt={'Uploaded'} style={{ maxWidth: '200px' }} />
             </li>
           );
         } else if (key === 'accept') {

@@ -1,12 +1,12 @@
-import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
-import { FieldData, FormData } from '../../types';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { FieldData, FormData } from '../../utils/types';
 import { Field } from '../shared/field/Field';
 import { useAppSelector } from '../../app/hooks';
 
 interface ControlledFieldProps {
   name: keyof FormData;
   fieldData: FieldData;
-  errors: FieldErrors<FieldValues>;
+  errors: FieldErrors<FormData>;
   register: UseFormRegister<FormData>;
 }
 const ControlledField = ({

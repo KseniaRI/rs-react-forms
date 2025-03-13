@@ -1,21 +1,35 @@
 import { useForm } from 'react-hook-form';
-import { FieldData, FormData } from '../../types';
-import { fieldsMap, fieldsNames } from '../shared/field/fieldsMap';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { setControlledFormData } from '../../app/formsSlice';
+import { FieldData, FormData } from '../../utils/types';
+import { validationSchema } from '../../utils/validationSchema';
+import { fieldsMap, fieldsNames } from '../shared/field/fieldsMap';
 import FormPage from '../shared/formPage/FormPage';
 import ControlledField from './ControlledField';
+import { fileToBase64 } from '../shared/field/lib/fileToBase64';
 
 const ControlledForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+    reset,
+  } = useForm<FormData>({
+    resolver: yupResolver(validationSchema),
+  });
 
-  const onSubmit = (data: FormData) => {
-    dispatch(setControlledFormData({ ...data, picture: data.picture[0] }));
+  const onSubmit = async (data: FormData) => {
+    if (data.picture && data.picture.length > 0) {
+      const base64Picture = await fileToBase64(data.picture[0]);
+      dispatch(setControlledFormData({ ...data, picture: base64Picture }));
+    }
+    reset();
+    navigate('/');
   };
 
   return (

@@ -1,4 +1,4 @@
-import { FieldData, FormData } from '../../../types';
+import { FieldData, FormData } from '../../../utils/types';
 
 export const fieldsMap: Record<keyof FormData, FieldData> = {
   name: {
@@ -56,6 +56,9 @@ export const fieldsMap: Record<keyof FormData, FieldData> = {
   accept: {
     label: 'accept',
     type: 'checkbox',
+    validation: {
+      required: true,
+    },
   },
   picture: {
     label: 'picture',

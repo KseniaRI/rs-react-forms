@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { NavLink } from 'react-router';
-import { FormType } from '../../../types';
+import { FormType } from '../../../utils/types';
 
 const FormPage = ({
   children,

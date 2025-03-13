@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FormData } from '../types';
+import { FormData } from '../utils/types';
 
 export type FormDataStore = Omit<FormData, 'picture'> & {
-  picture: File;
+  picture: string;
 };
+
 interface FormsState {
   uncontrolledFormData: null | FormDataStore;
   controlledFormData: null | FormDataStore;
   countries: string[];
 }
+
 const initialState: FormsState = {
   uncontrolledFormData: null,
   controlledFormData: null,
