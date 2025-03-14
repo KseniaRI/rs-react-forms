@@ -1,22 +1,42 @@
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import {
+  Control,
+  FieldErrors,
+  UseFormRegister,
+  UseFormSetValue,
+  useWatch,
+} from 'react-hook-form';
 import { FieldData, FormData } from '../../utils/types';
-import { Field } from '../shared/field/Field';
-import { useAppSelector } from '../../app/hooks';
+import { useCountries } from './hooks/useCountries';
+import Field from '../shared/field/Field';
+import CountriesList from '../shared/countriesList/CountriesList';
 
 interface ControlledFieldProps {
   name: keyof FormData;
   fieldData: FieldData;
   errors: FieldErrors<FormData>;
   register: UseFormRegister<FormData>;
+  control: Control<FormData>;
+  setValue: UseFormSetValue<FormData>;
 }
 const ControlledField = ({
   name,
   fieldData,
   errors,
   register,
+  control,
+  setValue,
 }: ControlledFieldProps) => {
   const { type, label, validation, options, placeholder } = fieldData;
-  const countries = useAppSelector(state => state.forms.countries);
+
+  const countryInputValue = useWatch({ control, name }) || '';
+
+  const {
+    filteredCountries,
+    showCountries,
+    handleAutocompleteChange,
+    handleCountryClick,
+    setShowCountries,
+  } = useCountries(setValue);
 
   switch (type) {
     case 'text':
@@ -41,7 +61,6 @@ const ControlledField = ({
         </Field>
       );
     case 'select': {
-      const selectOptions = name !== 'country' ? options : countries;
       return (
         <Field
           label={label}
@@ -50,9 +69,10 @@ const ControlledField = ({
           error={errors[name]}
         >
           <select
+            id={name}
             {...register(name, { required: fieldData.validation?.message })}
           >
-            {selectOptions?.map(option => (
+            {options?.map(option => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -61,7 +81,37 @@ const ControlledField = ({
         </Field>
       );
     }
-
+    case 'autocomplete': {
+      return (
+        <>
+          <Field
+            label={label}
+            required={validation?.required}
+            key={name}
+            error={errors[name]}
+          >
+            <input
+              {...register(name, { required: fieldData.validation?.message })}
+              type="text"
+              id={name}
+              value={
+                typeof countryInputValue === 'string' ? countryInputValue : ''
+              }
+              placeholder={placeholder || 'Start typing country...'}
+              onChange={e => handleAutocompleteChange(e)}
+              onBlur={() => setTimeout(() => setShowCountries(false), 200)}
+              onFocus={() => setShowCountries(true)}
+            />
+          </Field>
+          {showCountries && filteredCountries.length > 0 && (
+            <CountriesList
+              filteredCountries={filteredCountries}
+              handleCountryClick={handleCountryClick}
+            />
+          )}
+        </>
+      );
+    }
     default:
       throw new Error(`Unknown field type: ${fieldData.type}`);
   }

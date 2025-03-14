@@ -1,14 +1,14 @@
 import { FormEvent, useRef, useState } from 'react';
-import { FieldData } from '../../utils/types';
-import { fieldsMap, fieldsNames } from '../shared/field/fieldsMap';
-import FormPage from '../shared/formPage/FormPage';
-import UncontrolledField from './UncontrolledField';
+import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { setUncontrolledFormData } from '../../app/formsSlice';
 import { validationSchema } from '../../utils/validationSchema';
+import { FieldData } from '../../utils/types';
+import { fieldsMap, fieldsNames } from '../shared/field/lib/fieldsMap';
 import { fileToBase64 } from '../shared/field/lib/fileToBase64';
-import { useNavigate } from 'react-router';
+import FormPage from '../shared/formPage/FormPage';
+import UncontrolledField from './UncontrolledField';
 
 const UncontrolledForm = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,9 @@ const UncontrolledForm = () => {
   const formRefs = useRef<
     Record<string, HTMLInputElement | HTMLSelectElement | null>
   >({});
+
   const validationErrors: Record<string, { message: string }> = {};
+
   const [localErrors, setLocalErrors] = useState<
     Record<string, { message: string }>
   >({});
@@ -70,6 +72,7 @@ const UncontrolledForm = () => {
               fieldData={fieldData}
               fieldRef={el => (formRefs.current[fieldName] = el)}
               errors={localErrors}
+              formRefs={formRefs}
             />
           );
         })}

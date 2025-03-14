@@ -6,12 +6,16 @@ import { BrowserRouter } from 'react-router';
 import { Provider } from 'react-redux';
 import { store } from './app/store.ts';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
-  </StrictMode>
-);
+const rootEl = document.getElementById('root');
+
+if (rootEl) {
+  createRoot(rootEl).render(
+    <StrictMode>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </StrictMode>
+  );
+}

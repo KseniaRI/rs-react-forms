@@ -5,10 +5,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { setControlledFormData } from '../../app/formsSlice';
 import { FieldData, FormData } from '../../utils/types';
 import { validationSchema } from '../../utils/validationSchema';
-import { fieldsMap, fieldsNames } from '../shared/field/fieldsMap';
+import { fileToBase64 } from '../shared/field/lib/fileToBase64';
+import { fieldsMap, fieldsNames } from '../shared/field/lib/fieldsMap';
 import FormPage from '../shared/formPage/FormPage';
 import ControlledField from './ControlledField';
-import { fileToBase64 } from '../shared/field/lib/fileToBase64';
 
 const ControlledForm = () => {
   const dispatch = useDispatch();
@@ -19,6 +19,8 @@ const ControlledForm = () => {
     handleSubmit,
     formState: { errors, isValid },
     reset,
+    control,
+    setValue,
   } = useForm<FormData>({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
@@ -45,6 +47,8 @@ const ControlledForm = () => {
               fieldData={fieldData}
               errors={errors}
               register={register}
+              control={control}
+              setValue={setValue}
             />
           );
         })}

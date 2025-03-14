@@ -4,6 +4,7 @@
   gap: 20px;
 }
 .formPage input[type='submit'] {
+  display: block;
   margin-top: 10px;
   padding: 10px 20px;
   border: 1px solid lightgray;
@@ -23,4 +24,7 @@
 }
 .formPage a {
   text-decoration: underline;
+  padding: 10px 20px;
+  border: 1px solid lightgray;
+  border-radius: 20px;
 }

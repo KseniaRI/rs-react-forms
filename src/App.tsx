@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router';
-import './App.css';
 import Main from './components/main/Main';
 import UncontrolledForm from './components/uncontrolled/UncontrolledForm';
 import ControlledForm from './components/controlled/ControlledForm';
+import './App.css';
 
 function App() {
   return (

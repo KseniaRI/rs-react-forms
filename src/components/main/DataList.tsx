@@ -13,40 +13,44 @@ const DataList = ({
     <div className={styles.dataListWrap}>
       <h3>{`Data from ${formType === 'controlled' ? 'Controlled' : 'Uncontrolled'} form:`}</h3>
       <ul className={styles.dataList}>
-        {Object.entries(data).map(([key, value]) => {
-          if (key === 'picture' && typeof value === 'string') {
-            return (
-              <li key={key} className={styles.dataListItem}>
-                <span className={styles.dataListItemDetail}>{key} :</span>
-                <div className={styles.imgWrap}>
-                  <img
-                    src={value}
-                    alt={'Uploaded'}
-                    style={{ maxWidth: '200px' }}
-                  />
-                </div>
-              </li>
-            );
-          } else if (key === 'accept') {
-            return (
-              <li key={key} className={styles.dataListItem}>
-                <span className={styles.dataListItemDetail}>{key} :</span>
-                <span className={styles.dataListItemResult}>
-                  {value ? 'accepted' : 'denied'}
-                </span>
-              </li>
-            );
-          } else {
-            return (
-              <li key={key} className={styles.dataListItem}>
-                <span className={styles.dataListItemDetail}>{key} :</span>
-                <span className={styles.dataListItemResult}>
-                  {value.toString()}
-                </span>
-              </li>
-            );
-          }
-        })}
+        {Object.entries(data)
+          .reverse()
+          .map(([key, value]) => {
+            if (key === 'picture' && typeof value === 'string') {
+              return (
+                <li key={key} className={styles.dataListItem}>
+                  <span className={styles.dataListItemDetail}>{key} :</span>
+                  <div className={styles.imgWrap}>
+                    <img
+                      src={value}
+                      alt={'Uploaded'}
+                      style={{ maxWidth: '200px' }}
+                    />
+                  </div>
+                </li>
+              );
+            } else if (key === 'accept') {
+              return (
+                <li key={key} className={styles.dataListItem}>
+                  <span className={styles.dataListItemDetail}>{key} :</span>
+                  <span className={styles.dataListItemResult}>
+                    {value ? 'accepted' : 'denied'}
+                  </span>
+                </li>
+              );
+            } else {
+              return (
+                <li key={key} className={styles.dataListItem}>
+                  <span className={styles.dataListItemDetail}>{key} :</span>
+                  <span
+                    className={`${styles.dataListItemResult} ${key === 'country' ? styles.country : ''}`}
+                  >
+                    {value.toString()}
+                  </span>
+                </li>
+              );
+            }
+          })}
       </ul>
     </div>
   );

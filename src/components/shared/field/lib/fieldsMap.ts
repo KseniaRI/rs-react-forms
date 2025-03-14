@@ -1,4 +1,4 @@
-import { FieldData, FormData } from '../../../utils/types';
+import { FieldData, FormData } from '../../../../utils/types';
 
 export const fieldsMap: Record<keyof FormData, FieldData> = {
   name: {
@@ -72,7 +72,7 @@ export const fieldsMap: Record<keyof FormData, FieldData> = {
   },
   country: {
     label: 'country',
-    type: 'select',
+    type: 'autocomplete',
     validation: {
       required: true,
       message: 'This field is required',

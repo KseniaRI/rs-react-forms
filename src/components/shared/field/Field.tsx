@@ -12,13 +12,7 @@ interface FieldProps {
   };
 }
 
-export const Field = ({
-  children,
-  label,
-  htmlFor,
-  required,
-  error,
-}: FieldProps) => {
+const Field = ({ children, label, htmlFor, required, error }: FieldProps) => {
   const id = htmlFor || getChildId(children);
   return (
     <>
@@ -33,3 +27,5 @@ export const Field = ({
     </>
   );
 };
+
+export default Field;

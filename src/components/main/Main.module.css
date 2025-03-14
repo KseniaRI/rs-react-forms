@@ -4,7 +4,7 @@
   align-items: center;
 }
 .title {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 .nav {
   display: flex;
@@ -26,7 +26,7 @@
 .formResults {
   display: flex;
   gap: 100px;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 .dataListWrap {
   display: flex;
@@ -65,4 +65,7 @@
 }
 .dataListItemResult {
   color: #646cff;
+}
+.country {
+  text-transform: capitalize;
 }
