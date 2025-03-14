@@ -46,7 +46,7 @@ const UncontrolledForm = () => {
           setUncontrolledFormData({ ...validData, picture: base64Picture })
         );
         setLocalErrors({});
-        navigate('/');
+        navigate('/?newData=uncontrolled', { replace: true });
       })
       .catch(err => {
         err.inner.forEach((error: yup.ValidationError) => {

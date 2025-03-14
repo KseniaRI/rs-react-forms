@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { FormDataStore } from '../../app/formsSlice';
 import { FormType } from '../../utils/types';
 import styles from './Main.module.css';
@@ -5,12 +6,23 @@ import styles from './Main.module.css';
 const DataList = ({
   data,
   formType,
+  isNew,
 }: {
   data: FormDataStore;
   formType: FormType;
+  isNew: boolean;
 }) => {
+  const [highlight, setHighlight] = useState(isNew);
+
+  useEffect(() => {
+    if (isNew) {
+      const timer = setTimeout(() => setHighlight(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isNew]);
+
   return (
-    <div className={styles.dataListWrap}>
+    <div className={`${styles.dataListWrap} ${highlight ? styles.new : ''}`}>
       <h3>{`Data from ${formType === 'controlled' ? 'Controlled' : 'Uncontrolled'} form:`}</h3>
       <ul className={styles.dataList}>
         {Object.entries(data)

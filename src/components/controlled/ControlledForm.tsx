@@ -32,7 +32,7 @@ const ControlledForm = () => {
       dispatch(setControlledFormData({ ...data, picture: base64Picture }));
     }
     reset();
-    navigate('/');
+    navigate('/?newData=controlled', { replace: true });
   };
 
   return (

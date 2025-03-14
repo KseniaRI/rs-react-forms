@@ -1,9 +1,12 @@
-import { NavLink } from 'react-router';
+import { NavLink, useSearchParams } from 'react-router';
 import { useAppSelector } from '../../app/hooks';
 import DataList from './DataList';
 import styles from './Main.module.css';
 
 const Main = () => {
+  const [searchParams] = useSearchParams();
+  const newData = searchParams.get('newData');
+
   const controlledFormData = useAppSelector(
     state => state.forms.controlledFormData
   );
@@ -24,10 +27,18 @@ const Main = () => {
       </nav>
       <div className={styles.formResults}>
         {controlledFormData && (
-          <DataList data={controlledFormData} formType="controlled" />
+          <DataList
+            data={controlledFormData}
+            formType="controlled"
+            isNew={newData === 'controlled'}
+          />
         )}
         {uncontrolledFormData && (
-          <DataList data={uncontrolledFormData} formType="uncontrolled" />
+          <DataList
+            data={uncontrolledFormData}
+            formType="uncontrolled"
+            isNew={newData === 'uncontrolled'}
+          />
         )}
       </div>
     </div>

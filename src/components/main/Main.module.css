@@ -29,10 +29,15 @@
   margin-top: 30px;
 }
 .dataListWrap {
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
+}
+.dataListWrap.new {
+  border: 1px solid #646cff;
+  border-radius: 20px;
 }
 .dataList {
   list-style: circle;
