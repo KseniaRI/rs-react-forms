@@ -56,11 +56,12 @@
 .imgWrap {
   border-radius: 20px;
   overflow: hidden;
+  max-height: 200px;
 }
 .imgWrap img {
   display: block;
   object-fit: cover;
-  width: 100%;
+  max-width: 200px;
   height: auto;
 }
 .dataListItemDetail {

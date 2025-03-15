@@ -33,11 +33,7 @@ const DataList = ({
                 <li key={key} className={styles.dataListItem}>
                   <span className={styles.dataListItemDetail}>{key} :</span>
                   <div className={styles.imgWrap}>
-                    <img
-                      src={value}
-                      alt={'Uploaded'}
-                      style={{ maxWidth: '200px' }}
-                    />
+                    <img src={value} alt={'Uploaded'} />
                   </div>
                 </li>
               );
