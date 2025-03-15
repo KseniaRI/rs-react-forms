@@ -1,10 +1,11 @@
 .field {
+  position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 15px;
+  align-items: flex-start;
   border-top: 1px solid lightgray;
-  padding-top: 10px;
+  padding-top: 8px;
+  height: 70px;
 }
 .field input,
 .field select {
@@ -17,5 +18,7 @@
   height: 25px;
 }
 .error {
+  position: absolute;
+  bottom: 0;
   color: red;
 }

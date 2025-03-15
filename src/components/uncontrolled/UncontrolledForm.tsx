@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
@@ -9,6 +9,7 @@ import { fieldsMap, fieldsNames } from '../shared/field/lib/fieldsMap';
 import { fileToBase64 } from '../shared/field/lib/fileToBase64';
 import FormPage from '../shared/formPage/FormPage';
 import UncontrolledField from './UncontrolledField';
+import { useErrors } from './hooks/useErrors';
 
 const UncontrolledForm = () => {
   const dispatch = useDispatch();
@@ -18,11 +19,7 @@ const UncontrolledForm = () => {
     Record<string, HTMLInputElement | HTMLSelectElement | null>
   >({});
 
-  const validationErrors: Record<string, { message: string }> = {};
-
-  const [localErrors, setLocalErrors] = useState<
-    Record<string, { message: string }>
-  >({});
+  const { localErrors, setLocalErrors } = useErrors(formRefs);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,6 +34,7 @@ const UncontrolledForm = () => {
         return [key, ref?.value || ''];
       })
     );
+
     const base64Picture = await fileToBase64(data.picture[0]);
 
     validationSchema
@@ -49,6 +47,7 @@ const UncontrolledForm = () => {
         navigate('/?newData=uncontrolled', { replace: true });
       })
       .catch(err => {
+        const validationErrors: Record<string, { message: string }> = {};
         err.inner.forEach((error: yup.ValidationError) => {
           if (error.path) {
             validationErrors[error.path] = {
@@ -76,10 +75,7 @@ const UncontrolledForm = () => {
             />
           );
         })}
-        <input
-          type="submit"
-          // disabled={Object.keys(localErrors).length > 0}
-        />
+        <input type="submit" disabled={Object.keys(localErrors).length > 0} />
       </form>
     </FormPage>
   );

@@ -13,8 +13,8 @@
   color: #fff;
   transition: all 250ms linear;
 }
-.formPage input[type='submit']:hover,
-.formPage input[type='submit']:focus {
+.formPage input[type='submit']:not(:disabled):hover,
+.formPage input[type='submit']:not(:disabled):focus {
   border-color: #646cff;
   background-color: #fff;
   color: #646cff;
@@ -22,9 +22,13 @@
 .formPage input[type='submit']:disabled {
   background-color: lightgray;
 }
+
 .formPage a {
   text-decoration: underline;
   padding: 10px 20px;
   border: 1px solid lightgray;
   border-radius: 20px;
+}
+.formPage form {
+  width: 600px;
 }

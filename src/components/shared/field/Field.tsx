@@ -15,16 +15,14 @@ interface FieldProps {
 const Field = ({ children, label, htmlFor, required, error }: FieldProps) => {
   const id = htmlFor || getChildId(children);
   return (
-    <>
-      <div className={styles.field}>
-        <label htmlFor={id}>
-          {label}
-          {required && '*'}
-        </label>
-        {children}
-      </div>
+    <div className={styles.field}>
+      <label htmlFor={id}>
+        {label}
+        {required && '*'}
+      </label>
+      {children}
       {error && <small className={styles.error}>{error.message}</small>}
-    </>
+    </div>
   );
 };
 

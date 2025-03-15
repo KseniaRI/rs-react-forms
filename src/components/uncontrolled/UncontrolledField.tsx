@@ -78,7 +78,7 @@ const UncontrolledField = ({
     }
     case 'autocomplete': {
       return (
-        <>
+        <div style={{ position: 'relative' }}>
           <Field
             label={label}
             required={validation?.required}
@@ -99,7 +99,7 @@ const UncontrolledField = ({
               handleCountryClick={handleCountryClick}
             />
           )}
-        </>
+        </div>
       );
     }
     default:

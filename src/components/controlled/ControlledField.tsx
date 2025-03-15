@@ -83,7 +83,7 @@ const ControlledField = ({
     }
     case 'autocomplete': {
       return (
-        <>
+        <div style={{ position: 'relative' }}>
           <Field
             label={label}
             required={validation?.required}
@@ -109,7 +109,7 @@ const ControlledField = ({
               handleCountryClick={handleCountryClick}
             />
           )}
-        </>
+        </div>
       );
     }
     default:
