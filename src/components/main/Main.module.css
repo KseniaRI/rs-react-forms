@@ -1,0 +1,77 @@
+.mainPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  margin-bottom: 30px;
+}
+.nav {
+  display: flex;
+  gap: 100px;
+}
+.link {
+  padding: 10px 20px;
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  background-color: #646cff;
+  color: #fff;
+  transition: all 250ms linear;
+}
+.link:hover,
+.link:focus {
+  border-color: #646cff;
+  background-color: #fff;
+}
+.formResults {
+  display: flex;
+  gap: 100px;
+  margin-top: 30px;
+}
+.dataListWrap {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+.dataListWrap.new {
+  border: 1px solid #646cff;
+  border-radius: 20px;
+}
+.dataList {
+  list-style: circle;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dataListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 10px;
+}
+.imgWrap {
+  border-radius: 20px;
+  overflow: hidden;
+  max-height: 200px;
+}
+.imgWrap img {
+  display: block;
+  object-fit: cover;
+  max-width: 200px;
+  height: auto;
+}
+.dataListItemDetail {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.dataListItemResult {
+  color: #646cff;
+}
+.country {
+  text-transform: capitalize;
+}

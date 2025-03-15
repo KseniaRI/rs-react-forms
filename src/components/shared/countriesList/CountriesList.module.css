@@ -1,0 +1,19 @@
+.countriesList {
+  position: absolute;
+  right: -300px;
+  top: 8px;
+  width: 300px;
+  max-height: fit-content;
+  border: 1px solid #646cff;
+  border-radius: 4px;
+  padding: 5px 10px;
+  background-color: #fff;
+  z-index: 100;
+}
+.countriesListItem {
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.countriesListItem:hover {
+  font-weight: 600;
+}
